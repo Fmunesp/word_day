@@ -3,17 +3,92 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/main.css" />
-    <script defer src="scripts/main.js"></script>
     <title>Word Day</title>
+    <!-- Vinculacion de archivo JS -->
+    <script defer src="scripts/main.js"></script>
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="styles/main.css" />
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .row {
+        display: flex;
+        gap: 5px;
+      }
+      footer {
+        margin-top: 20px;
+      }
+      .keyboard-row {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        margin-bottom: 5px;
+      }
+      .key {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
     <header>
-      <nav></nav>
+      <h3>Word Day</h3>
     </header>
-
-    <main></main>
-
-    <footer></footer>
+    <main>
+      <!-- Filas de inputs -->
+      <div id="main_container"></div>
+    </main>
+    <footer>
+      <div class="keyboard-row">
+        <span class="key" id="word_Q">Q</span
+        ><span class="key" id="word_W">W</span
+        ><span class="key" id="word_E">E</span
+        ><span class="key" id="word_R">R</span
+        ><span class="key" id="word_T">T</span
+        ><span class="key" id="word_Y">Y</span
+        ><span class="key" id="word_U">U</span
+        ><span class="key" id="word_I">I</span
+        ><span class="key" id="word_O">O</span
+        ><span class="key" id="word_P">P</span>
+      </div>
+      <div class="keyboard-row">
+        <span class="key" id="word_A">A</span
+        ><span class="key" id="word_S">S</span
+        ><span class="key" id="word_D">D</span
+        ><span class="key" id="word_F">F</span
+        ><span class="key" id="word_G">G</span
+        ><span class="key" id="word_H">H</span
+        ><span class="key" id="word_J">J</span
+        ><span class="key" id="word_K">K</span
+        ><span class="key" id="word_L">L</span
+        ><span class="key" id="word_Ñ">Ñ</span>
+      </div>
+      <div class="keyboard-row">
+        <span class="key" id="word_Z">Z</span
+        ><span class="key" id="word_X">X</span
+        ><span class="key" id="word_C">C</span
+        ><span class="key" id="word_V">V</span
+        ><span class="key" id="word_B">B</span
+        ><span class="key" id="word_N">N</span
+        ><span class="key" id="word_M">M</span
+        ><span class="key" id="word_BK">⌫</span>
+      </div>
+    </footer>
   </body>
 </html>
