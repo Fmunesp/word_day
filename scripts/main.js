@@ -3,7 +3,7 @@ const crearTablero = (mainContainer) => {
     for (let i = 0; i < 6; i++) {
         mainContainer.innerHTML += `<div id="container_row_${i}" class="row">`;
         for (let j = 0; j < 5; j++) {
-            mainContainer.innerHTML += `<input type="text" id="input_${i}_${j}" class="word" maxlength="1">`;
+            mainContainer.innerHTML += `<input type="text" id="input_${i}_${j}" class="word_input" maxlength="1">`;
         }
         mainContainer.innerHTML += `</div>`;
     }
