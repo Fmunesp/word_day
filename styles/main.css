@@ -56,3 +56,11 @@ footer {
   border-radius: 5px;
   text-transform: uppercase;
 }
+
+.word_input:focus {
+  outline-color:rgb(144, 202, 249);
+}
+
+#word_OK, #word_BK {
+  width: 4rem;
+}
