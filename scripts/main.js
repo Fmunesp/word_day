@@ -1,3 +1,5 @@
+const qwerty = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ñ', 'OK' ,'Z', 'X', 'C', 'V', 'B', 'N', 'M','⌫'];
+
 const crearTablero = (mainContainer) => {
     // rellenamos el tablero
     for (let i = 0; i < 6; i++) {
@@ -11,11 +13,32 @@ const crearTablero = (mainContainer) => {
     }
 }
 
+const crearTeclado = container => {
+    let aux = [...qwerty];
+    for(let i = 0; i < 3; i++) {
+        let containerAux = `<div class="keyboard-row">`;
+        for(let j = 0; j < 10; j++) {
+            if(i === 2 && j === 8) {
+                containerAux += `<span class="key" id="word_BK">${aux[j]}</span>`;
+                break;
+            }
+            containerAux += `<span class="key" id="word_${aux[j]}">${aux[j]}</span>`;
+        }
+        containerAux += `</div>`;
+        console.log(containerAux);
+        container.innerHTML += containerAux;
+        aux.splice(0, 10);
+    }
+}
+
 // Una vez cargado el DOM, ejecutamos la función principal
 document.addEventListener('DOMContentLoaded', () => {
     
     const mainContainer = document.getElementById('main_container');
     crearTablero(mainContainer);
+
+    const keyboardContainer = document.getElementById('keyboard_container');
+    crearTeclado(keyboardContainer);
 
     // Evento para detectar si se ha pulsado una tecla distinta a una letra
     document.addEventListener('keydown', event => {
