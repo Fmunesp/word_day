@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Day</title>
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <header>
+      <h3>Word Day</h3>
+    </header>
+    <main>
+      <!-- Filas de inputs -->
+      <h1>HAS PERDIDO!</h1>
+      <h2>La palabra era: <span>
+        <script>
+          const word = localStorage.getItem('palabra');
+          console.log({word})
+          document.write(word);
+        </script>
+      </span></h2>
+    </main>
+    <footer></footer>
+  </body>
+</html>
