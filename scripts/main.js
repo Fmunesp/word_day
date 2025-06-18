@@ -1,5 +1,6 @@
 let fila = 0;
 let columna = 0; 
+    //Creamos una constante para el teclado
 const qwerty = [
   "Q",
   "W",
@@ -32,6 +33,7 @@ const qwerty = [
   "⌫",
 ];
 
+    // API de palabras  
 fetch("https://random-word-api.herokuapp.com/word?lang=es&length=5")
   .then((data) => data.json())
   .then((word) => {
@@ -39,8 +41,9 @@ fetch("https://random-word-api.herokuapp.com/word?lang=es&length=5")
   })
   .catch((error) => console.error("Error:", error));
 
+    //Constante para crear el tablero
 const crearTablero = (mainContainer) => {
-  // rellenamos el tablero
+    // Rellenar el tablero columnas(i), filas(j)
   for (let i = 0; i < 6; i++) {
     let isDisabled = i === 0 ? "" : "disabled";
     mainContainer.innerHTML += `<div id="container_row_${i}" class="row">`;
@@ -52,7 +55,9 @@ const crearTablero = (mainContainer) => {
   }
 };
 
+    //Constante para crear el teclado
 const crearTeclado = (container) => {
+    //"Creamos una copia del teclado para asi no modificar el original"
   let aux = [...qwerty];
   for (let i = 0; i < 3; i++) {
     let containerAux = `<div class="keyboard-row">`;
@@ -69,12 +74,14 @@ const crearTeclado = (container) => {
   }
 };
 
+    //Constante para si la palabra de entrada es igual a la palabra correcta y que cambie de color
 const tratarFila = (fila, palabraUsuario, palabra) => {
   if (palabraUsuario === palabra) {
     for (let i = 0; i < 5; i++) {
       document.getElementById(`input_${fila}_${i}`).style.backgroundColor =
         "green";
     }
+    //Cambio de pantalla a victoria
     window.location.href = "../winner.html";
     return;
   }
@@ -83,15 +90,19 @@ const tratarFila = (fila, palabraUsuario, palabra) => {
   let palabraUsuarioArray = palabraUsuario.split("");
   let colorLetras = [];
 
+    // Para recorrer las letras de la palabra de entrada
   for (let i = 0; i < 5; i++) {
+       // Si la letra está en la posición correcta
     if (palabraArray[i] === palabraUsuarioArray[i]) {
       colorLetras.push("green");
       document.getElementById(`word_${palabraUsuarioArray[i]}`).style.backgroundColor = "green";
     } else {
+        // Si la letra está en la palabra pero en otra posición
       if (palabraArray.includes(palabraUsuarioArray[i])) {
         colorLetras.push("yellow");
         document.getElementById(`word_${palabraUsuarioArray[i]}`).style.backgroundColor = "yellow";
       } else {
+          // Si la letra no está en la palabra
         colorLetras.push("red");
         document.getElementById(`word_${palabraUsuarioArray[i]}`).style.backgroundColor = "black";
         document.getElementById(`word_${palabraUsuarioArray[i]}`).disable = true;
@@ -99,31 +110,35 @@ const tratarFila = (fila, palabraUsuario, palabra) => {
     }
   }
 
+    // Aplica los colores a las casillas de la fila actual
   for (let i = 0; i < 5; i++) {
     document.getElementById(`input_${fila}_${i}`).style.backgroundColor =
       colorLetras[i];
   }
-
+    // Si hemos completado todas las filas y no hemos acertado nos manda a la pantalla de derrota
   if (fila === 5) {
     window.location.href = "../loser.html";
     return;
   }
 };
 
+    //Utilizamos esto para desactivar la fila anterior y activar la siguiente
 const toggleInput = (fila) => {
   let filaAnterior = fila - 1;
   for (let i = 0; i < 5; i++) {
     document.getElementById(`input_${filaAnterior}_${i}`).disabled = true;
     let filaAct = document.getElementById(`input_${fila}_${i}`);
     filaAct.disabled = false;
+    //Colocamos el foco en el primer recuadro de la fila actual
     if (i === 0) {
-      filaAct.focus();
+      filaAct.focus();  
     }
     
   }
   columna = 0;
 };
 
+    //Constante para comprobar la palabra ingresada por el usuario en la fila que estemos
 const logicaTablero = (palabra) => {
   let palabraUsuario = "";
   for (let i = 0; i < 5; i++) {
@@ -133,7 +148,7 @@ const logicaTablero = (palabra) => {
     }
     palabraUsuario += document.getElementById(`input_${fila}_${i}`).value;
   }
-
+    // Para saber que la palabra tenga 5 letras
   if (palabraUsuario.length !== 5) {
     alert("Por favor, rellene todos los campos");
     return;
@@ -145,6 +160,7 @@ const logicaTablero = (palabra) => {
   toggleInput(fila);
 };
 
+
 const borrarFila = (fila) => {
   for (let i = 0; i < 5; i++) {
     let filaAct = document.getElementById(`input_${fila}_${i}`);
@@ -155,12 +171,16 @@ const borrarFila = (fila) => {
   }
 }
 
+
 const main = (palabra) => {
+  // Muestra en consola la palabra seleccionada
   console.log(palabra[0]);
+  // Almacena la primera palabra
   localStorage.setItem("palabra", palabra[0]);
+  // Tiene el contenedor principal y crea el tablero del jego
   const mainContainer = document.getElementById("main_container");
   crearTablero(mainContainer);
-
+  //Genera el teclado virtual
   const keyboardContainer = document.getElementById("keyboard_container");
   crearTeclado(keyboardContainer);
 
@@ -213,10 +233,12 @@ const main = (palabra) => {
     logicaTablero(palabra);
   });
 
+  // evento para el boton de borrar
   document.getElementById("word_BK").addEventListener("click", (event) => {
     borrarFila(fila);
   });
 
+  // para controlar el teclado
   document.addEventListener("click", (event) => {
     const { target } = event;
     if (target.classList.contains("key") && target.id !== "word_OK" && target.id !== "word_BK") {

@@ -64,3 +64,15 @@ footer {
 #word_OK, #word_BK {
   width: 4rem;
 }
+
+.btn_play {
+  background-color: #0040ff;
+  color: rgb(256, 256, 256);
+  font-size: 2rem;
+  border: 3px solid white;
+  border-radius: 2px;
+}
+
+.btn_play:hover{
+  background-color: #01266f;
+}
